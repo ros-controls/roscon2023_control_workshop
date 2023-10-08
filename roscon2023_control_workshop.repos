@@ -1,6 +1,29 @@
 repositories:
-  ## EXAMPLE DEPENDENCY
-#   <some_ros_package>:
-#     type: git
-#     url: git@github.com:<some_github_namespace>/<some_ros_package>.git
-#     version: master
+  Universal_Robots_ROS2_Description:
+    type: git
+    url: https://github.com/StoglRobotics-forks/Universal_Robots_ROS2_Description
+    version: new-gazebo-names
+  husky:
+    type: git
+    url: https://github.com/StoglRobotics-forks/husky.git
+    version: ros2control_roscon2023_workshop
+  interactive_marker_twist_server:
+    type: git
+    url: https://github.com/ros-visualization/interactive_marker_twist_server.git
+    version: humble-devel
+  robot_upstart:
+    type: git
+    url: https://github.com/clearpathrobotics/robot_upstart.git
+    version: foxy-devel
+  robotiq_85_gripper:
+    type: git
+    url: git@github.com:StoglRobotics-forks/robotiq_85_gripper.git
+    version: rolling-ros2-control-simulation
+  ros2_control:
+    type: git
+    url: git@github.com:ros-controls/ros2_control.git
+    version: master
+  ros2_controllers:
+    type: git
+    url: git@github.com:ros-controls/ros2_controllers.git
+    version: ba12d8ea92ead6bb83e4f7f226f7643c2506190b
