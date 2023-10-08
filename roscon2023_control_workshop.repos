@@ -27,3 +27,7 @@ repositories:
     type: git
     url: git@github.com:ros-controls/ros2_controllers.git
     version: ba12d8ea92ead6bb83e4f7f226f7643c2506190b
+  tiago_robot:
+    type: git
+    url: git@github.com:bmagyar/tiago_robot.git
+    version: roscon2023
