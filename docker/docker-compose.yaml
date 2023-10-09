@@ -1,0 +1,92 @@
+version: "3.9"
+
+services:
+  dev:
+    image: bmagyar/roscon2023_workshop
+    network_mode: host
+    init: true
+    # user: $DOCKER_USER
+    environment:
+      # Wall off ROS, when this is FALSE, ROS_DOMAIN_ID is important to set
+      - ROS_LOCALHOST_ONLY=1
+      # The ROS domain ID to use in deployment. See https://docs.ros.org/en/humble/Concepts/About-Domain-ID.html
+      - ROS_DOMAIN_ID
+      #####################
+      # # Network interface to use in the generated DDS configuration (in the container). Defaults to "lo".
+      # - CYCLONEDDS_NETWORK_INTERFACE=${CYCLONEDDS_NETWORK_INTERFACE:-lo}
+      # # Comma-separated list of the IP addresses of machines that will participate in the ROS network,
+      # # including the host machine's own IP address. For example: CYCLONEDDS_PEER_ADDRESSES=192.168.0.35,192.168.0.37)
+      # # Defaults to "127.0.0.1"
+      # - CYCLONEDDS_PEER_ADDRESSES=${CYCLONEDDS_PEER_ADDRESSES:-127.0.0.1}
+      # - CYCLONEDDS_USE_MULTICAST=${CYCLONEDDS_USE_MULTICAST:-false}
+      # # The ROS middleware to use. Defaults to rmw_cyclonedds_cpp, the CycloneDDS middleware.
+      # # MoveIt Studio supports CycloneDDS and FastRTPS, and will respect your CYCLONEDDS_URI and FASTRTPS_DEFAULT_PROFILES_FILE for custom configurations.
+      # - RMW_IMPLEMENTATION=${RMW_IMPLEMENTATION:-rmw_cyclonedds_cpp}
+      # # If using FastRTPS, setting this variable to 1 allows modifying Quality-of-Service (QoS) settings from a specified XML file.
+      # - RMW_FASTRTPS_USE_QOS_FROM_XML
+      #####################
+      # Allow the user to run graphical programs from within the container. You probably don't want to change these!
+      - DISPLAY
+      - QT_X11_NO_MITSHM=1
+      
+      # User settings
+      # - USER_UID=${UID}
+      # - USERNAME=${USER}
+    volumes:
+      - ./ws:/home/ros/ws
+      # Allow the user to run graphical programs from within the docker container.
+      - /tmp/.X11-unix:/tmp/.X11-unix:ro
+      - ${XAUTHORITY:-$HOME/.Xauthority}:/root/.Xauthority
+      - /dev/dri:/dev/dri
+      # # Mount the host's DDS config(s) so we can talk to user's ROS tooling
+      # - ${CYCLONEDDS_URI:-/dev/null}:/home/${USERNAME}/.ros/cyclonedds_host.xml
+      # - ${FASTRTPS_DEFAULT_PROFILES_FILE:-/dev/null}:/home/${USERNAME}/.ros/fastdds_host.xml
+    # this add docker -it
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
+
+  rviz:
+    extends: dev
+    # profiles:
+    #   - rviz
+    command: bash -c "ros2 launch moveit_studio_agent developer_rviz.launch.py"
+
+  # # Builds the user workspace. If STUDIO_HOST_USER_WORKSPACE is empty, this service will do nothing.
+  # workspace_builder:
+  #   extends: base
+  #   # profiles:
+  #   #   - build_and_test
+  #   command: bash -c "source /moveit_studio_utils/build_user_ws.sh"
+
+  # # Executes tests for the user workspace. If STUDIO_HOST_USER_WORKSPACE is empty, this service will do nothing.
+  # workspace_test:
+  #   container_name: "moveit_studio_workspace_test"
+  #   extends: base
+  #   depends_on:
+  #     workspace_builder:
+  #       condition: service_completed_successfully
+  #   # profiles:
+  #   #   - build_and_test
+  #   command: bash -c "source /moveit_studio_utils/test_user_ws.sh"
+
+  # # Starts the MoveIt Studio Agent
+  # agent:
+  #   extends: base
+  #   privileged: true
+  #   # Allow the user to use the host's network video4linux and usb_device devices.
+  #   # "c 81:* rmw": This rule specifies that the container has read, write, and mknod access (rmw) to all character devices (c) with a major number of 81 (video4linux).
+  #   # "c 189:* rmw": This rule gives the container read, write, and mknod access (rmw) to all character devices (c) with a major number of 189 (usb_device).
+  #   device_cgroup_rules:
+  #     - "c 81:* rmw"
+  #     - "c 189:* rmw"
+  #   depends_on:
+  #     rest_api:
+  #       condition: service_healthy
+  #   volumes:
+  #     # Allow the user to run graphical programs from within the docker container.
+  #     - /tmp/.X11-unix:/tmp/.X11-unix:ro
+  #     # Allow access to host hardware e.g. RealSense cameras
+  #     - /dev:/dev
+  #   # TODO: replace this tee here and in common_aliases with some integrated logger
+  #   command: bash -c "ros2 launch moveit_studio_agent studio_agent.launch.py 2>&1 | tee -a ~/.ros/log/agent_0_0.log"
+
