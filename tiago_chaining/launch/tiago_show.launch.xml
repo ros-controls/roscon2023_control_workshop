@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+
+    <let name="robot_description" value="$(command 'xacro $(find-pkg-share tiago_chaining)/config/tiago_full_unrolled.urdf')" />
+
+    <node pkg="joint_state_publisher_gui" exec="joint_state_publisher_gui"/>
+
+    <node pkg="robot_state_publisher" exec="robot_state_publisher" output="both">
+        <param name="robot_description" value="$(var robot_description)" />
+    </node>
+
+    <node pkg="rviz2" exec="rviz2" output="log" args="-d $(find-pkg-share tiago_chaining)/config/model_and_tf.rviz"/>
+</launch>

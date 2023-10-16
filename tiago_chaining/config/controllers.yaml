@@ -1,0 +1,33 @@
+head_controller:
+  ros__parameters:
+    type: joint_trajectory_controller/JointTrajectoryController
+    joints:
+      - head_1_joint
+      - head_2_joint
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+
+    constraints:
+      goal_time: 2.0
+      stopped_velocity_tolerance: 5.0
+      head_1_joint:
+        goal: 0.5
+      head_2_joint:
+        goal: 0.5
+
+mobile_base_controller:
+  ros__parameters:
+    type: diff_drive_controller/DiffDriveController
+    use_stamped_vel: False
+    left_wheel_names  : 
+      - wheel_left_joint
+    right_wheel_names :
+      - wheel_right_joint
+
+    # Publish limited velocity
+    publish_cmd: true
+
+    # Publish wheel data
+    publish_wheel_data: true
