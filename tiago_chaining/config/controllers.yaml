@@ -1,6 +1,21 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 50  # Hz
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+    head_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+    mobile_base_controller:
+      type: diff_drive_controller/DiffDriveController
+
+    # cmd_vel_relay:
+    #   type: cmd_vel_relay_controller/RelayController
+
 head_controller:
   ros__parameters:
-    type: joint_trajectory_controller/JointTrajectoryController
     joints:
       - head_1_joint
       - head_2_joint
@@ -19,7 +34,6 @@ head_controller:
 
 mobile_base_controller:
   ros__parameters:
-    type: diff_drive_controller/DiffDriveController
     use_stamped_vel: False
     left_wheel_names  : 
       - wheel_left_joint
@@ -31,3 +45,6 @@ mobile_base_controller:
 
     # Publish wheel data
     publish_wheel_data: true
+
+# cmd_vel_relay:
+#   ros__parameters:
