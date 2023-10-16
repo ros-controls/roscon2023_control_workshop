@@ -12,7 +12,7 @@ controller_manager:
       type: diff_drive_controller/DiffDriveController
 
     # cmd_vel_relay:
-    #   type: cmd_vel_relay_controller/RelayController
+    #   type: twist_relay_controller/RelayController
 
 head_controller:
   ros__parameters:
@@ -48,3 +48,7 @@ mobile_base_controller:
 
 # cmd_vel_relay:
 #   ros__parameters:
+#     linear_velocity_cmd_if: ""
+#     angular_velocity_cmd_if: ""
+#     steering_angle_cmd_if: ""
+#     yaw_multiplier: 1.0
