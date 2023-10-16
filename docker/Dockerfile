@@ -6,7 +6,7 @@ RUN apt-get update && apt-get install -y git tig vim build-essential && \
 
 # Commands are combined in single RUN statement with "apt/lists" folder removal to reduce image size
 RUN apt-get update && \
-    apt-get install -y ros-${ROS_DISTRO}-ros2-control ros-${ROS_DISTRO}-ros2-controllers ros-${ROS_DISTRO}-rviz2 && \
+    apt-get install -y ros-${ROS_DISTRO}-ros2-control ros-${ROS_DISTRO}-ros2-controllers ros-${ROS_DISTRO}-kinematics-interface-kdl ros-${ROS_DISTRO}-rviz2 tmux terminator && \
     rm -rf /var/lib/apt/lists/*
 
 # tiago-related deps
@@ -17,3 +17,4 @@ RUN apt-get update && \
 ENV ROS_LOCALHOST_ONLY=TRUE
 
 RUN mkdir -p /home/ros/ws/src
+
