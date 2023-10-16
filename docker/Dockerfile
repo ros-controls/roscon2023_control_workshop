@@ -17,4 +17,3 @@ RUN apt-get update && \
 ENV ROS_LOCALHOST_ONLY=TRUE
 
 RUN mkdir -p /home/ros/ws/src
-

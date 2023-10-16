@@ -6,7 +6,7 @@ services:
     network_mode: host
     init: true
     environment:
-      # Wall off ROS, when this is FALSE, ROS_DOMAIN_ID is important to set
+      # Wall off ROS. When this is FALSE, ROS_DOMAIN_ID is important to set
       - ROS_LOCALHOST_ONLY=1
       # Settings to make graphical programs work
       - DISPLAY
