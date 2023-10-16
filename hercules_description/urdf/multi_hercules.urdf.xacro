@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro" name="$(arg name)">
+  <!-- robot name parameter -->
+  <xacro:arg name="name" default="multi_hercules"/>
+
+  <xacro:arg name="prefix" default="" />
+  <!-- ros2_control related parameters -->
+  <xacro:arg name="use_mock_hardware" default="true" />
+  <xacro:arg name="mock_sensor_commands" default="false" />
+  <!-- Simulation parameter -->
+  <xacro:arg name="sim_gazebo_classic" default="false" />
+  <xacro:arg name="sim_gazebo" default="false" />
+
+  <!-- import Husky macro -->
+  <xacro:include filename="$(find hercules_description)/urdf/hercules_macro.urdf.xacro"/>
+
+  <link name="world"/>
+  <joint name="world-to-hercules1_joint" type="fixed">
+    <origin xyz="0 -2 0" rpy="0 0 0" />
+    <parent link="world" />
+    <child link="hercules_1/base_link" />
+  </joint>
+  <joint name="world-to-hercules2_joint" type="fixed">
+    <origin xyz="0 2 0" rpy="0 0 0" />
+    <parent link="world" />
+    <child link="hercules_2/base_link" />
+  </joint>
+
+  <!-- Load hercules description -->
+  <xacro:hercules
+    prefix="hercules_1/"
+    use_mock_hardware="$(arg use_mock_hardware)"
+    mock_sensor_commands="$(arg mock_sensor_commands)"
+    sim_gazebo_classic="$(arg sim_gazebo_classic)"
+    sim_gazebo="$(arg sim_gazebo)"
+    />
+
+  <xacro:hercules
+    prefix="hercules_2/"
+    use_mock_hardware="$(arg use_mock_hardware)"
+    mock_sensor_commands="$(arg mock_sensor_commands)"
+    sim_gazebo_classic="$(arg sim_gazebo_classic)"
+    sim_gazebo="$(arg sim_gazebo)"
+    />
+
+
+
+</robot>
