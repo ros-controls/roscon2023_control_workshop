@@ -64,285 +64,568 @@ Visualization Manager:
         Expand Link Details: false
         Expand Tree: false
         Link Tree Style: Links in Alphabetic Order
-        base_footprint:
+        hercules_1_base_footprint:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-        base_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        front_bumper_link:
+        hercules_1_base_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        front_left_wheel:
+        hercules_1_front_bumper_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        front_right_wheel:
+        hercules_1_front_left_wheel:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        gps_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        imu_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        inertial_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        manipulator_fixture_box:
+        hercules_1_front_right_wheel:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        port_base:
+        hercules_1_gps_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-        port_base_link:
+        hercules_1_imu_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-        port_base_link_inertia:
+        hercules_1_inertial_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-          Value: true
-        port_flange:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        port_forearm_link:
+        hercules_1_manipulator_fixture_box:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        port_ft_frame:
+        hercules_1_port_base:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-        port_robotiq_85_base_link:
+        hercules_1_port_base_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-          Value: true
-        port_robotiq_85_left_finger_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        port_robotiq_85_left_finger_tip_link:
+        hercules_1_port_base_link_inertia:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        port_robotiq_85_left_inner_knuckle_link:
+        hercules_1_port_flange:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        hercules_1_port_forearm_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        port_robotiq_85_left_knuckle_link:
+        hercules_1_port_ft_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        hercules_1_port_robotiq_85_base_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        port_robotiq_85_right_finger_link:
+        hercules_1_port_robotiq_85_left_finger_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        port_robotiq_85_right_finger_tip_link:
+        hercules_1_port_robotiq_85_left_finger_tip_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        port_robotiq_85_right_inner_knuckle_link:
+        hercules_1_port_robotiq_85_left_inner_knuckle_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        port_robotiq_85_right_knuckle_link:
+        hercules_1_port_robotiq_85_left_knuckle_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        port_shoulder_link:
+        hercules_1_port_robotiq_85_right_finger_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        port_tool0:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        port_upper_arm_link:
+        hercules_1_port_robotiq_85_right_finger_tip_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        port_wrist_1_link:
+        hercules_1_port_robotiq_85_right_inner_knuckle_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        port_wrist_2_link:
+        hercules_1_port_robotiq_85_right_knuckle_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        port_wrist_3_link:
+        hercules_1_port_shoulder_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        rear_bumper_link:
+        hercules_1_port_tool0:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        hercules_1_port_upper_arm_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        rear_left_wheel:
+        hercules_1_port_wrist_1_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        rear_right_wheel:
+        hercules_1_port_wrist_2_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        starboard_base:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        starboard_base_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        starboard_base_link_inertia:
+        hercules_1_port_wrist_3_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        starboard_flange:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        starboard_forearm_link:
+        hercules_1_rear_bumper_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        starboard_ft_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        starboard_robotiq_85_base_link:
+        hercules_1_rear_left_wheel:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        starboard_robotiq_85_left_finger_link:
+        hercules_1_rear_right_wheel:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        starboard_robotiq_85_left_finger_tip_link:
+        hercules_1_starboard_base:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        hercules_1_starboard_base_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        hercules_1_starboard_base_link_inertia:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        starboard_robotiq_85_left_inner_knuckle_link:
+        hercules_1_starboard_flange:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        hercules_1_starboard_forearm_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        starboard_robotiq_85_left_knuckle_link:
+        hercules_1_starboard_ft_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        hercules_1_starboard_robotiq_85_base_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        starboard_robotiq_85_right_finger_link:
+        hercules_1_starboard_robotiq_85_left_finger_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        starboard_robotiq_85_right_finger_tip_link:
+        hercules_1_starboard_robotiq_85_left_finger_tip_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        starboard_robotiq_85_right_inner_knuckle_link:
+        hercules_1_starboard_robotiq_85_left_inner_knuckle_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        starboard_robotiq_85_right_knuckle_link:
+        hercules_1_starboard_robotiq_85_left_knuckle_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        starboard_shoulder_link:
+        hercules_1_starboard_robotiq_85_right_finger_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        starboard_tool0:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        starboard_upper_arm_link:
+        hercules_1_starboard_robotiq_85_right_finger_tip_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        starboard_wrist_1_link:
+        hercules_1_starboard_robotiq_85_right_inner_knuckle_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        starboard_wrist_2_link:
+        hercules_1_starboard_robotiq_85_right_knuckle_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        starboard_wrist_3_link:
+        hercules_1_starboard_shoulder_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        top_chassis_link:
+        hercules_1_starboard_tool0:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        hercules_1_starboard_upper_arm_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        top_plate_front_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        top_plate_link:
+        hercules_1_starboard_wrist_1_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        top_plate_rear_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        user_rail_link:
+        hercules_1_starboard_wrist_2_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
+        hercules_1_starboard_wrist_3_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        hercules_1_top_chassis_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        hercules_1_top_plate_front_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        hercules_1_top_plate_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        hercules_1_top_plate_rear_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        hercules_1_user_rail_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        hercules_2_base_footprint:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        hercules_2_base_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        hercules_2_front_bumper_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        hercules_2_front_left_wheel:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        hercules_2_front_right_wheel:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        hercules_2_gps_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        hercules_2_imu_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        hercules_2_inertial_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        hercules_2_manipulator_fixture_box:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        hercules_2_port_base:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        hercules_2_port_base_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        hercules_2_port_base_link_inertia:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        hercules_2_port_flange:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        hercules_2_port_forearm_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        hercules_2_port_ft_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        hercules_2_port_robotiq_85_base_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        hercules_2_port_robotiq_85_left_finger_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        hercules_2_port_robotiq_85_left_finger_tip_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        hercules_2_port_robotiq_85_left_inner_knuckle_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        hercules_2_port_robotiq_85_left_knuckle_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        hercules_2_port_robotiq_85_right_finger_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        hercules_2_port_robotiq_85_right_finger_tip_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        hercules_2_port_robotiq_85_right_inner_knuckle_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        hercules_2_port_robotiq_85_right_knuckle_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        hercules_2_port_shoulder_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        hercules_2_port_tool0:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        hercules_2_port_upper_arm_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        hercules_2_port_wrist_1_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        hercules_2_port_wrist_2_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        hercules_2_port_wrist_3_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        hercules_2_rear_bumper_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        hercules_2_rear_left_wheel:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        hercules_2_rear_right_wheel:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        hercules_2_starboard_base:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        hercules_2_starboard_base_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        hercules_2_starboard_base_link_inertia:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        hercules_2_starboard_flange:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        hercules_2_starboard_forearm_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        hercules_2_starboard_ft_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        hercules_2_starboard_robotiq_85_base_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        hercules_2_starboard_robotiq_85_left_finger_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        hercules_2_starboard_robotiq_85_left_finger_tip_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        hercules_2_starboard_robotiq_85_left_inner_knuckle_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        hercules_2_starboard_robotiq_85_left_knuckle_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        hercules_2_starboard_robotiq_85_right_finger_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        hercules_2_starboard_robotiq_85_right_finger_tip_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        hercules_2_starboard_robotiq_85_right_inner_knuckle_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        hercules_2_starboard_robotiq_85_right_knuckle_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        hercules_2_starboard_shoulder_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        hercules_2_starboard_tool0:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        hercules_2_starboard_upper_arm_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        hercules_2_starboard_wrist_1_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        hercules_2_starboard_wrist_2_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        hercules_2_starboard_wrist_3_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        hercules_2_top_chassis_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        hercules_2_top_plate_front_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        hercules_2_top_plate_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        hercules_2_top_plate_rear_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        hercules_2_user_rail_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        world:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
       Mass Properties:
         Inertia: false
         Mass: false
@@ -354,7 +637,7 @@ Visualization Manager:
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
-    Fixed Frame: odom
+    Fixed Frame: map
     Frame Rate: 30
   Name: root
   Tools:
@@ -397,7 +680,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 5.283966541290283
+      Distance: 10.123358726501465
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -412,10 +695,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.41539818048477173
+      Pitch: 0.7103980779647827
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 3.908573865890503
+      Yaw: 3.5835726261138916
     Saved: ~
 Window Geometry:
   Displays:
