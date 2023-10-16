@@ -354,7 +354,7 @@ Visualization Manager:
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
-    Fixed Frame: manipulator_fixture_box
+    Fixed Frame: odom
     Frame Rate: 30
   Name: root
   Tools:
@@ -434,4 +434,4 @@ Window Geometry:
     collapsed: false
   Width: 2560
   X: 0
-  Y: 1470
+  Y: 30
