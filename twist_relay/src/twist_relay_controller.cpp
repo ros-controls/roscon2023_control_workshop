@@ -68,10 +68,6 @@ controller_interface::CallbackReturn RelayController::on_configure(
     {
       if ((msg->header.stamp.sec == 0) && (msg->header.stamp.nanosec == 0))
       {
-        RCLCPP_WARN_ONCE(
-          get_node()->get_logger(),
-          "Received TwistStamped with zero timestamp, setting it to current "
-          "time, this message will only be shown once");
         msg->header.stamp = get_node()->get_clock()->now();
       }
       last_msg_ptr_.set(std::move(msg));
@@ -83,12 +79,11 @@ controller_interface::CallbackReturn RelayController::on_configure(
 controller_interface::return_type RelayController::update(
   const rclcpp::Time & time, const rclcpp::Duration & /*period*/)
 {
-  RCLCPP_INFO(get_node()->get_logger(), "Trying to update...");
   std::shared_ptr<Twist> last_command_msg;
   last_msg_ptr_.get(last_command_msg);
   if (last_command_msg != nullptr)
   {
-      RCLCPP_INFO(get_node()->get_logger(), "UPDATED");
+    RCLCPP_INFO(get_node()->get_logger(), "UPDATED");
 
     command_interfaces_[0].set_value(last_command_msg->twist.linear.x);
     command_interfaces_[1].set_value(last_command_msg->twist.angular.z);
