@@ -14,23 +14,20 @@ controller_manager:
     cmd_vel_relay:
       type: twist_relay_controller/RelayController
 
-# head_controller:
-#   ros__parameters:
-#     joints:
-#       - head_1_joint
-#       - head_2_joint
-#     command_interfaces:
-#       - position
-#     state_interfaces:
-#       - position
+head_controller:
+  ros__parameters:
+    joints:
+      - head_1_joint
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
 
-#     constraints:
-#       goal_time: 2.0
-#       stopped_velocity_tolerance: 5.0
-#       head_1_joint:
-#         goal: 0.5
-#       head_2_joint:
-#         goal: 0.5
+    constraints:
+      goal_time: 2.0
+      stopped_velocity_tolerance: 5.0
+      head_1_joint:
+        goal: 0.5
 
 mobile_base_controller:
   ros__parameters:
@@ -50,5 +47,5 @@ cmd_vel_relay:
   ros__parameters:
     linear_velocity_cmd_if: "mobile_base_controller/angular/velocity"
     angular_velocity_cmd_if: "mobile_base_controller/linear/velocity"
-    steering_angle_cmd_if: "head_1_joint/position"
+    steering_angle_cmd_if: "head_controller/head_1_joint/position"
     yaw_multiplier: 1.0
