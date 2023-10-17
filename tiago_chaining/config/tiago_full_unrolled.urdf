@@ -66,6 +66,7 @@
 	<ros2_control name="ros2_control_tiago_system" type="system">
 		<hardware>
 			<plugin>mock_components/GenericSystem</plugin>
+			<param name="calculate_dynamics">true</param>
 		</hardware>
 		<joint name="wheel_right_joint">
 			<command_interface name="velocity">
@@ -780,27 +781,8 @@
 			</geometry>
 		</collision>
 	</link>
-	<link name="suspension_right_link">
-		<inertial>
-			<origin rpy="0 0 0" xyz="0 0 -0.02"/>
-			<mass value="10"/>
-			<inertia ixx="1.0" ixy="0" ixz="0" iyy="1.0" iyz="0" izz="1.0"/>
-		</inertial>
-		<kinematic>0</kinematic>
-		<gravity>1</gravity>
-	</link>
-	<joint name="suspension_right_joint" type="prismatic">
-		<origin rpy="0 0 0" xyz="0 0 0"/>
-		<axis xyz="0 0 1"/>
-		<limit effort="100.0" lower="-0.005" upper="0.005" velocity="1.0"/>
-		<child link="suspension_right_link"/>
-		<parent link="base_link"/>
-		<calibration rising="0.0"/>
-		<dynamics damping="100"/>
-		<safety_controller k_position="0" k_velocity="10" soft_lower_limit="-0.005" soft_upper_limit="0.005"/>
-	</joint>
 	<joint name="wheel_right_joint" type="continuous">
-		<parent link="suspension_right_link"/>
+		<parent link="base_link"/>
 		<child link="wheel_right_link"/>
 		<origin rpy="-1.5707963267948966 0 0" xyz="0 -0.2022 0.0"/>
 		<axis xyz="0 0 1"/>
@@ -850,27 +832,8 @@
 			</geometry>
 		</collision>
 	</link>
-	<link name="suspension_left_link">
-		<inertial>
-			<origin rpy="0 0 0" xyz="0 0 -0.02"/>
-			<mass value="10"/>
-			<inertia ixx="1.0" ixy="0" ixz="0" iyy="1.0" iyz="0" izz="1.0"/>
-		</inertial>
-		<kinematic>0</kinematic>
-		<gravity>1</gravity>
-	</link>
-	<joint name="suspension_left_joint" type="prismatic">
-		<origin rpy="0 0 0" xyz="0 0 0"/>
-		<axis xyz="0 0 1"/>
-		<limit effort="100.0" lower="-0.005" upper="0.005" velocity="1.0"/>
-		<child link="suspension_left_link"/>
-		<parent link="base_link"/>
-		<calibration rising="0.0"/>
-		<dynamics damping="100"/>
-		<safety_controller k_position="0" k_velocity="10" soft_lower_limit="-0.005" soft_upper_limit="0.005"/>
-	</joint>
 	<joint name="wheel_left_joint" type="continuous">
-		<parent link="suspension_left_link"/>
+		<parent link="base_link"/>
 		<child link="wheel_left_link"/>
 		<origin rpy="-1.5707963267948966 0 0" xyz="0 0.2022 0.0"/>
 		<axis xyz="0 0 1"/>
