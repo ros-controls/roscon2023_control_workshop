@@ -48,7 +48,6 @@ public:
 protected:
   rclcpp::Subscription<Twist>::SharedPtr twist_subscriber_ = nullptr;
   realtime_tools::RealtimeBox<std::shared_ptr<Twist>> last_msg_ptr_{nullptr};
-  bool subscriber_is_active_ = false;
 
   std::shared_ptr<ParamListener> param_listener_;
   Params params_;

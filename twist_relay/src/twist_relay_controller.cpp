@@ -59,22 +59,13 @@ controller_interface::InterfaceConfiguration RelayController::state_interface_co
 controller_interface::CallbackReturn RelayController::on_configure(
   const rclcpp_lifecycle::State & /*previous_state*/)
 {
-  // update parameters if they have changed
-  if (param_listener_->is_old(params_))
-  {
-    params_ = param_listener_->get_params();
-    RCLCPP_INFO(get_node()->get_logger(), "Parameters were updated");
-  }
+  params_ = param_listener_->get_params();
+  RCLCPP_INFO(get_node()->get_logger(), "Parameters were updated");
 
   twist_subscriber_ = get_node()->create_subscription<Twist>(
     DEFAULT_COMMAND_TOPIC, rclcpp::SystemDefaultsQoS(),
     [this](const std::shared_ptr<Twist> msg) -> void
     {
-      if (!subscriber_is_active_)
-      {
-        RCLCPP_WARN(get_node()->get_logger(), "Can't accept new commands. subscriber is inactive");
-        return;
-      }
       if ((msg->header.stamp.sec == 0) && (msg->header.stamp.nanosec == 0))
       {
         RCLCPP_WARN_ONCE(
@@ -92,10 +83,13 @@ controller_interface::CallbackReturn RelayController::on_configure(
 controller_interface::return_type RelayController::update(
   const rclcpp::Time & time, const rclcpp::Duration & /*period*/)
 {
+  RCLCPP_INFO(get_node()->get_logger(), "Trying to update...");
   std::shared_ptr<Twist> last_command_msg;
   last_msg_ptr_.get(last_command_msg);
   if (last_command_msg != nullptr)
   {
+      RCLCPP_INFO(get_node()->get_logger(), "UPDATED");
+
     command_interfaces_[0].set_value(last_command_msg->twist.linear.x);
     command_interfaces_[1].set_value(last_command_msg->twist.angular.z);
     double fake_steering_angle = last_command_msg->twist.angular.z * params_.yaw_multiplier;
