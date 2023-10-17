@@ -1,0 +1,17 @@
+twist_relay_controller:
+  linear_velocity_cmd_if: {
+    type: string,
+    description:  "",
+  }
+  angular_velocity_cmd_if: {
+    type: string,
+    description:  "",
+  }
+  steering_angle_cmd_if: {
+    type: string,
+    description:  "",
+  }
+  yaw_multiplier: {
+    type: double,
+    default_value: 1.0,
+  }
