@@ -13,11 +13,12 @@ services:
       - QT_X11_NO_MITSHM=1
     volumes:
       # Workspace mount
-      - ./ws:/home/ros/ws
+      - ../../../../ws:/home/ros/ws
       # Settings to make graphical programs work
       - /tmp/.X11-unix:/tmp/.X11-unix:ro
       - ${XAUTHORITY:-$HOME/.Xauthority}:/root/.Xauthority
       - /dev/dri:/dev/dri
     # this adds docker -it
+    working_dir: /home/ros/ws
     stdin_open: true # docker run -i
     tty: true        # docker run -t
