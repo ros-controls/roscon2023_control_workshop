@@ -17,3 +17,6 @@ RUN apt-get update && \
 ENV ROS_LOCALHOST_ONLY=TRUE
 
 RUN mkdir -p /home/ros/ws/src
+
+RUN echo "alias s='source install/setup.bash'" >> /root/.bashrc
+RUN echo "alias cb='colcon build --symlink-install'" >> /root/.bashrc
