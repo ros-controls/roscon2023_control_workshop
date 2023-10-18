@@ -52,7 +52,7 @@ mobile_base_controller:
 
 cmd_vel_relay:
   ros__parameters:
-    linear_velocity_cmd_if: "mobile_base_controller/angular/velocity"
-    angular_velocity_cmd_if: "mobile_base_controller/linear/velocity"
-    steering_angle_cmd_if: "head_controller/head_1_joint/position"
+    linear_velocity_cmd_if: ""
+    angular_velocity_cmd_if: ""
+    steering_angle_cmd_if: ""
     yaw_multiplier: 1.0

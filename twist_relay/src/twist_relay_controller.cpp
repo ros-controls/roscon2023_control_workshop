@@ -45,9 +45,13 @@ controller_interface::CallbackReturn RelayController::on_init()
 controller_interface::InterfaceConfiguration RelayController::command_interface_configuration()
   const
 {
-  std::vector<std::string> conf_names = {
-    params_.linear_velocity_cmd_if, params_.angular_velocity_cmd_if, params_.steering_angle_cmd_if};
-  return {interface_configuration_type::INDIVIDUAL, conf_names};
+  // TODO
+  // interface_configuration_type::ALL -- for claiming all available state interfaces
+  // interface_configuration_type::INDIVIDUAL -- for claiming individual interfaces
+  // interface_configuration_type::NONE -- for not claiming anything at all
+
+  // return {FLAG, VECTOR_IF_NAMES}
+  return {};
 }
 
 controller_interface::InterfaceConfiguration RelayController::state_interface_configuration() const
@@ -85,10 +89,11 @@ controller_interface::return_type RelayController::update(
   {
     RCLCPP_INFO(get_node()->get_logger(), "UPDATED");
 
-    command_interfaces_[0].set_value(last_command_msg->twist.linear.x);
-    command_interfaces_[1].set_value(last_command_msg->twist.angular.z);
-    double fake_steering_angle = last_command_msg->twist.angular.z * params_.yaw_multiplier;
-    command_interfaces_[2].set_value(fake_steering_angle);
+    //TODO wink-wink last_command_msg->twist
+    // command_interfaces_[0].set_value();
+    // command_interfaces_[1].set_value();
+    // double fake_steering_angle = ??? * params_.yaw_multiplier;
+    // command_interfaces_[2].set_value(fake_steering_angle);
   }
   return controller_interface::return_type::OK;
 }
