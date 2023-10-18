@@ -35,3 +35,7 @@ repositories:
     type: git
     url: https://github.com/pal-robotics/pmb2_robot.git
     version: humble-devel
+  pal_gripper:
+    type: git
+    url: https://github.com/bmagyar/pal_gripper.git
+    version: only-description
