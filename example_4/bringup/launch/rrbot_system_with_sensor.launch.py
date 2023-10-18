@@ -148,6 +148,16 @@ def generate_launch_description():
         arguments=["fts_broadcaster", "--controller-manager", "/controller_manager"],
     )
 
+    mock_sensor_commands_controller_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=[
+            "mock_sensor_commands_forward_controller",
+            "--controller-manager",
+            "/controller_manager",
+        ],
+    )
+
     # Delay rviz start after `joint_state_broadcaster`
     delay_rviz_after_joint_state_broadcaster_spawner = RegisterEventHandler(
         event_handler=OnProcessExit(
@@ -171,6 +181,7 @@ def generate_launch_description():
         delay_rviz_after_joint_state_broadcaster_spawner,
         delay_robot_controller_spawner_after_joint_state_broadcaster_spawner,
         fts_broadcaster_spawner,
+        mock_sensor_commands_controller_spawner,
     ]
 
     return LaunchDescription(declared_arguments + nodes)

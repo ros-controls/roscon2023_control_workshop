@@ -5,6 +5,9 @@ controller_manager:
     forward_position_controller:
       type: forward_command_controller/ForwardCommandController
 
+    mock_sensor_commands_forward_controller:
+      type: forward_command_controller/MultiInterfaceForwardCommandController
+
     fts_broadcaster:
       type: force_torque_sensor_broadcaster/ForceTorqueSensorBroadcaster
 
@@ -17,6 +20,13 @@ forward_position_controller:
       - joint1
       - joint2
     interface_name: position
+
+mock_sensor_commands_forward_controller:
+  ros__parameters:
+    joint: tcp_fts_sensor
+    interfaces:
+      - force.x
+      - force.z
 
 fts_broadcaster:
   ros__parameters:
