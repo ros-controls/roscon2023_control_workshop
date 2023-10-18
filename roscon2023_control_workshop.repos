@@ -31,3 +31,7 @@ repositories:
     type: git
     url: https://github.com/bmagyar/tiago_robot.git
     version: roscon2023
+  pmb2_robot:
+    type: git
+    url: https://github.com/pal-robotics/pmb2_robot.git
+    version: humble-devel
