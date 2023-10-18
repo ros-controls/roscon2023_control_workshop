@@ -1,6 +1,6 @@
 <library path="twist_relay_controller">
   <class name="twist_relay_controller/RelayController"
-         type="twist_relay_controller::RelayController" base_class_type="controller_interface::ControllerInterface">
+         type="twist_relay_controller::RelayController" base_class_type="controller_interface::ChainableControllerInterface">
   <description>
     Controller relaying parts of a twist message
   </description>

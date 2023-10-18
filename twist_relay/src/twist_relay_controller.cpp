@@ -23,7 +23,7 @@ using controller_interface::interface_configuration_type;
 
 namespace twist_relay_controller
 {
-RelayController::RelayController() : controller_interface::ControllerInterface() {}
+RelayController::RelayController() : controller_interface::ChainableControllerInterface() {}
 
 controller_interface::CallbackReturn RelayController::on_init()
 {
@@ -76,21 +76,71 @@ controller_interface::CallbackReturn RelayController::on_configure(
   return controller_interface::CallbackReturn::SUCCESS;
 }
 
-controller_interface::return_type RelayController::update(
-  const rclcpp::Time & time, const rclcpp::Duration & /*period*/)
+std::vector<hardware_interface::CommandInterface> RelayController::on_export_reference_interfaces()
+{
+  const int nr_ref_itfs = 2;
+  reference_interfaces_.resize(nr_ref_itfs, std::numeric_limits<double>::quiet_NaN());
+  std::vector<hardware_interface::CommandInterface> reference_interfaces;
+  reference_interfaces.reserve(nr_ref_itfs);
+
+  reference_interfaces.push_back(hardware_interface::CommandInterface(
+    get_node()->get_name(), std::string("drive/") + hardware_interface::HW_IF_VELOCITY,
+    &reference_interfaces_[0]));
+
+  reference_interfaces.push_back(hardware_interface::CommandInterface(
+    get_node()->get_name(), std::string("turn/") + hardware_interface::HW_IF_VELOCITY,
+    &reference_interfaces_[1]));
+
+  return reference_interfaces;
+}
+
+// return_type ChainableControllerInterface::update(
+//   const rclcpp::Time & time, const rclcpp::Duration & period)
+// {
+//   return_type ret = return_type::ERROR;
+
+//   if (!is_in_chained_mode())
+//   {
+//     ret = update_reference_from_subscribers(time, period);
+//     if (ret != return_type::OK)
+//     {
+//       return ret;
+//     }
+//   }
+
+//   ret = update_and_write_commands(time, period);
+
+//   return ret;
+// }
+
+controller_interface::return_type RelayController::update_and_write_commands(
+  const rclcpp::Time & time, const rclcpp::Duration & period)
+{
+  command_interfaces_[0].set_value(reference_interfaces_[0]);
+  command_interfaces_[1].set_value(reference_interfaces_[1]);
+  double fake_steering_angle = reference_interfaces_[1] * params_.yaw_multiplier;
+  command_interfaces_[2].set_value(fake_steering_angle);
+  return controller_interface::return_type::OK;
+}
+
+controller_interface::return_type
+RelayController::update_reference_from_subscribers(
+  const rclcpp::Time & time, const rclcpp::Duration & period)
 {
   std::shared_ptr<Twist> last_command_msg;
   last_msg_ptr_.get(last_command_msg);
   if (last_command_msg != nullptr)
   {
-    RCLCPP_INFO(get_node()->get_logger(), "UPDATED");
-
-    command_interfaces_[0].set_value(last_command_msg->twist.linear.x);
-    command_interfaces_[1].set_value(last_command_msg->twist.angular.z);
-    double fake_steering_angle = last_command_msg->twist.angular.z * params_.yaw_multiplier;
-    command_interfaces_[2].set_value(fake_steering_angle);
+    reference_interfaces_[0] = last_command_msg->twist.linear.x;
+    reference_interfaces_[1] = last_command_msg->twist.angular.z;
   }
   return controller_interface::return_type::OK;
+}
+
+bool RelayController::on_set_chained_mode(bool chained_mode)
+{
+  // Always accept switch to/from chained mode
+  return true || chained_mode;
 }
 
 }  // namespace twist_relay_controller
@@ -98,4 +148,4 @@ controller_interface::return_type RelayController::update(
 #include "pluginlib/class_list_macros.hpp"
 
 PLUGINLIB_EXPORT_CLASS(
-  twist_relay_controller::RelayController, controller_interface::ControllerInterface)
+  twist_relay_controller::RelayController, controller_interface::ChainableControllerInterface)
