@@ -36,21 +36,6 @@ def generate_launch_description():
     )
     declared_arguments.append(
         DeclareLaunchArgument(
-            "use_mock_hardware",
-            default_value="false",
-            description="Start robot with mock hardware mirroring command to its states.",
-        )
-    )
-    declared_arguments.append(
-        DeclareLaunchArgument(
-            "mock_sensor_commands",
-            default_value="false",
-            description="Enable mocked command interfaces for sensors used for simple simulations. \
-            Used only if 'use_mock_hardware' parameter is true.",
-        )
-    )
-    declared_arguments.append(
-        DeclareLaunchArgument(
             "slowdown", default_value="50.0", description="Slowdown factor of the RRbot."
         )
     )
@@ -64,8 +49,6 @@ def generate_launch_description():
 
     # Initialize Arguments
     prefix = LaunchConfiguration("prefix")
-    use_mock_hardware = LaunchConfiguration("use_mock_hardware")
-    mock_sensor_commands = LaunchConfiguration("mock_sensor_commands")
     slowdown = LaunchConfiguration("slowdown")
     gui = LaunchConfiguration("gui")
 
@@ -86,10 +69,10 @@ def generate_launch_description():
             prefix,
             " ",
             "use_mock_hardware:=",
-            use_mock_hardware,
+            "False",
             " ",
             "mock_sensor_commands:=",
-            mock_sensor_commands,
+            "False",
             " ",
             "slowdown:=",
             slowdown,
