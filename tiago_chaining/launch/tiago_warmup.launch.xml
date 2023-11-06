@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+
+    <let name="robot_description" value="$(command 'xacro $(find-pkg-share tiago_chaining)/config/tiago_full_unrolled.urdf')" />
+
+    <node pkg="robot_state_publisher" exec="robot_state_publisher" output="both">
+        <param name="robot_description" value="$(var robot_description)" />
+    </node>
+
+    <node pkg="controller_manager" exec="ros2_control_node" output="both">
+        <param name="robot_description" value="$(var robot_description)" />
+        <param from="$(find-pkg-share tiago_chaining)/config/controllers.yaml" />
+    </node>
+
+    <node pkg="controller_manager" exec="spawner" args="joint_state_broadcaster"/>
+
+    <node pkg="controller_manager" exec="spawner" args="head_controller"/>
+
+    <node pkg="controller_manager" exec="spawner" args="mobile_base_controller"/>
+
+</launch>
