@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+    <node pkg="key_teleop" exec="key_teleop" output="screen">
+    	<remap from="/key_vel" to="/mobile_base_controller/cmd_vel_unstamped"/>
+    	<!-- <remap from="/key_vel" to="/cmd_vel"/> -->
+	  	<!-- <param name="twist_stamped_enabled" value="True"/> -->
+    </node>
+</launch>
+
+<!--
+ros2 run key_teleop key_teleop key_vel:=/mobile_base_controller/cmd_vel_unstamped
+
+ros2 run key_teleop key_teleop key_vel:=/mobile_base_controller/cmd_vel_unstamped -ros-args -p "twist_stamped_enabled:=True"
+
+ros2 run key_teleop key_teleop key_vel:=/cmd_vel -ros-args -p "twist_stamped_enabled:=True"
+
+ -->

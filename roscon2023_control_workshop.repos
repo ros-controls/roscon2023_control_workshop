@@ -17,13 +17,25 @@ repositories:
     version: foxy-devel
   robotiq_85_gripper:
     type: git
-    url: git@github.com:StoglRobotics-forks/robotiq_85_gripper.git
+    url: https://github.com/StoglRobotics-forks/robotiq_85_gripper.git
     version: rolling-ros2-control-simulation
   ros2_control:
     type: git
-    url: git@github.com:ros-controls/ros2_control.git
+    url: https://github.com/ros-controls/ros2_control.git
     version: master
   ros2_controllers:
     type: git
-    url: git@github.com:ros-controls/ros2_controllers.git
-    version: ba12d8ea92ead6bb83e4f7f226f7643c2506190b
+    url: https://github.com/ros-controls/ros2_controllers.git
+    version: chainable-diff-drive
+  tiago_robot:
+    type: git
+    url: https://github.com/bmagyar/tiago_robot.git
+    version: roscon2023
+  pmb2_robot:
+    type: git
+    url: https://github.com/pal-robotics/pmb2_robot.git
+    version: humble-devel
+  pal_gripper:
+    type: git
+    url: https://github.com/bmagyar/pal_gripper.git
+    version: only-description
