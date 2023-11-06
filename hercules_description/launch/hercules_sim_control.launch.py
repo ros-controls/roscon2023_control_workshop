@@ -22,7 +22,7 @@ from launch.actions import (
     OpaqueFunction,
     RegisterEventHandler,
 )
-from launch.conditions import IfCondition, UnlessCondition
+from launch.conditions import IfCondition
 from launch.event_handlers import OnProcessExit
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import Command, FindExecutable, LaunchConfiguration, PathJoinSubstitution
@@ -38,6 +38,8 @@ def launch_setup(context, *args, **kwargs):
     sim_gazebo_classic = LaunchConfiguration("sim_gazebo_classic")
     sim_gazebo = LaunchConfiguration("sim_gazebo")
     # ros2_control arguments
+    controller_manager_namespace = LaunchConfiguration("controller_manager_namespace")
+    controller_manager_name = LaunchConfiguration("controller_manager_name")
     use_mock_hardware = LaunchConfiguration("use_mock_hardware")
     mock_sensor_commands = LaunchConfiguration("mock_sensor_commands")
     # Initialize Arguments
@@ -52,9 +54,8 @@ def launch_setup(context, *args, **kwargs):
     description_file = LaunchConfiguration("description_file")
     prefix = LaunchConfiguration("prefix")
     start_arm_controllers = LaunchConfiguration("start_arm_controllers")
-    base_initial_controller = LaunchConfiguration("base_initial_controller")
-    port_initial_joint_controller = LaunchConfiguration("port_initial_joint_controller")
-    starboard_initial_joint_controller = LaunchConfiguration("starboard_initial_joint_controller")
+    odometry_frame_name = LaunchConfiguration("odometry_frame_name")
+    map_to_odom_y_axis = LaunchConfiguration("map_to_odom_y_axis")
     launch_rviz = LaunchConfiguration("launch_rviz")
 
     joint_limit_params = PathJoinSubstitution(
@@ -140,6 +141,7 @@ def launch_setup(context, *args, **kwargs):
     robot_state_publisher_node = Node(
         package="robot_state_publisher",
         executable="robot_state_publisher",
+        namespace=controller_manager_namespace,
         output="both",
         parameters=[{"use_sim_time": True}, robot_description],
     )
@@ -156,7 +158,7 @@ def launch_setup(context, *args, **kwargs):
     joint_state_broadcaster_spawner = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=["joint_state_broadcaster", "--controller-manager", "/controller_manager"],
+        arguments=["joint_state_broadcaster", "--controller-manager", controller_manager_name],
     )
 
     # Delay rviz start after `joint_state_broadcaster`
@@ -167,54 +169,23 @@ def launch_setup(context, *args, **kwargs):
         )
     )
 
-    # Base
-    spawn_base_controller = Node(
-        package="controller_manager",
-        executable="spawner",
-        arguments=[base_initial_controller, "-c", "/controller_manager"],
-        output="screen",
-    )
-
-    # Port
-
-    # There may be other controllers of the joints, but this is the initially-started one
-    port_initial_joint_controller_spawner_started = Node(
-        package="controller_manager",
-        executable="spawner",
-        arguments=[port_initial_joint_controller, "-c", "/controller_manager"],
-        condition=IfCondition(start_arm_controllers),
-    )
-    port_initial_joint_controller_spawner_stopped = Node(
-        package="controller_manager",
-        executable="spawner",
-        arguments=[port_initial_joint_controller, "-c", "/controller_manager", "--stopped"],
-        condition=UnlessCondition(start_arm_controllers),
-    )
-    port_gripper_controller_spawner = Node(
-        package="controller_manager",
-        executable="spawner",
-        arguments=["port_gripper_controller", "-c", "/controller_manager"],
-    )
-
-    # Starboard
-
-    # There may be other controllers of the joints, but this is the initially-started one
-    starboard_initial_joint_controller_spawner_started = Node(
-        package="controller_manager",
-        executable="spawner",
-        arguments=[starboard_initial_joint_controller, "-c", "/controller_manager"],
-        condition=IfCondition(start_arm_controllers),
-    )
-    starboard_initial_joint_controller_spawner_stopped = Node(
-        package="controller_manager",
-        executable="spawner",
-        arguments=[starboard_initial_joint_controller, "-c", "/controller_manager", "--stopped"],
-        condition=UnlessCondition(start_arm_controllers),
-    )
-    starboard_gripper_controller_spawner = Node(
-        package="controller_manager",
-        executable="spawner",
-        arguments=["starboard_gripper_controller", "-c", "/controller_manager"],
+    hercules_controller_spawners = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            [
+                FindPackageShare("hercules_description"),
+                "/launch",
+                "/hercules_controllers.launch.py",
+            ]
+        ),
+        launch_arguments={
+            "controller_manager_name": controller_manager_name,
+            "start_arm_controllers": start_arm_controllers,
+            "base_controller": "base_velocity_controller",
+            "port_joint_controller": "port_joint_trajectory_controller",
+            "starboard_joint_controller": "starboard_joint_trajectory_controller",
+            "port_gripper_controller": "port_gripper_controller",
+            "starboard_gripper_controller": "starboard_gripper_controller",
+        }.items(),
     )
 
     # ros2_control_node
@@ -224,12 +195,22 @@ def launch_setup(context, *args, **kwargs):
     ros2_control_node = Node(
         package="controller_manager",
         executable="ros2_control_node",
+        namespace=controller_manager_namespace,
         parameters=[robot_description, robot_controllers],
         output={
             "stdout": "screen",
             "stderr": "screen",
         },
         condition=IfCondition(use_mock_hardware),
+    )
+
+    map_to_odom_tf = Node(
+        package="tf2_ros",
+        executable="static_transform_publisher",
+        namespace=controller_manager_namespace,
+        name="map_to_odom",
+        arguments=["0", map_to_odom_y_axis, "0", "0", "0", "0", "map", odometry_frame_name],
+        output="screen",
     )
 
     # Gazebo nodes
@@ -284,14 +265,9 @@ def launch_setup(context, *args, **kwargs):
         robot_state_publisher_node,
         delay_rviz_after_joint_state_broadcaster_spawner,
         joint_state_broadcaster_spawner,
-        spawn_base_controller,
-        port_initial_joint_controller_spawner_stopped,
-        port_initial_joint_controller_spawner_started,
-        port_gripper_controller_spawner,
-        starboard_initial_joint_controller_spawner_stopped,
-        starboard_initial_joint_controller_spawner_started,
-        starboard_gripper_controller_spawner,
+        hercules_controller_spawners,
         ros2_control_node,
+        map_to_odom_tf,
         gzserver,
         gzclient,
         gazebo_spawn_robot,
@@ -398,6 +374,20 @@ def generate_launch_description():
     )
     declared_arguments.append(
         DeclareLaunchArgument(
+            "controller_manager_namespace",
+            default_value="/",
+            description="Namespace of the controller manager and ros2_control.",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "controller_manager_name",
+            default_value="controller_manager",
+            description="Name of the controller manager",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
             "use_mock_hardware",
             default_value="true",
             description="Start robot with fake hardware mirroring command to its states.",
@@ -420,23 +410,16 @@ def generate_launch_description():
     )
     declared_arguments.append(
         DeclareLaunchArgument(
-            "base_initial_controller",
-            default_value="base_velocity_controller",
-            description="Base controller to start.",
+            "odometry_frame_name",
+            default_value="odom",
+            description="Odometry frame of the robot to have correct transform to map.",
         )
     )
     declared_arguments.append(
         DeclareLaunchArgument(
-            "port_initial_joint_controller",
-            default_value="port_joint_trajectory_controller",
-            description="Robot controller to start.",
-        )
-    )
-    declared_arguments.append(
-        DeclareLaunchArgument(
-            "starboard_initial_joint_controller",
-            default_value="starboard_joint_trajectory_controller",
-            description="Robot controller to start.",
+            "map_to_odom_y_axis",
+            default_value="0",
+            description="Value of the y-Axis for map to odom transformation.",
         )
     )
     declared_arguments.append(

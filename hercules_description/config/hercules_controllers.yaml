@@ -1,4 +1,4 @@
-controller_manager:
+/**:
   ros__parameters:
     update_rate: 500  # Hz
 
@@ -103,7 +103,7 @@ port_force_torque_sensor_broadcaster:
       - torque.x
       - torque.y
       - torque.z
-    frame_id: tool0
+    frame_id: port_tool0
     topic_name: ft_data
 
 
@@ -164,7 +164,7 @@ starboard_force_torque_sensor_broadcaster:
       - torque.x
       - torque.y
       - torque.z
-    frame_id: tool0
+    frame_id: starboard_tool0
     topic_name: ft_data
 
 starboard_gripper_controller:
