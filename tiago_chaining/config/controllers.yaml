@@ -1,0 +1,58 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 50  # Hz
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+    head_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+    mobile_base_controller:
+      type: diff_drive_controller/DiffDriveController
+
+    cmd_vel_relay:
+      type: twist_relay_controller/RelayController
+
+head_controller:
+  ros__parameters:
+    joints:
+      - head_1_joint
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+
+    constraints:
+      goal_time: 2.0
+      stopped_velocity_tolerance: 5.0
+      head_1_joint:
+        goal: 0.5
+
+mobile_base_controller:
+  ros__parameters:
+    use_stamped_vel: False
+    left_wheel_names  :
+      - wheel_left_joint
+    right_wheel_names :
+      - wheel_right_joint
+
+    wheel_radius: 0.0985
+    wheel_separation: 0.4044
+
+    wheel_separation_multiplier: 1.0
+    left_wheel_radius_multiplier: 1.0
+    right_wheel_radius_multiplier: 1.0
+
+    # Publish limited velocity
+    publish_cmd: true
+
+    # Publish wheel data
+    publish_wheel_data: true
+
+cmd_vel_relay:
+  ros__parameters:
+    linear_velocity_cmd_if: "mobile_base_controller/angular/velocity"
+    angular_velocity_cmd_if: "mobile_base_controller/linear/velocity"
+    steering_angle_cmd_if: "head_controller/head_1_joint/position"
+    yaw_multiplier: 1.0
